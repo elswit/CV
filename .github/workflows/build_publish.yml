@@ -1,31 +1,36 @@
-name: Build and Publish PDF
+name: Build and Commit PDF
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
+    branches:
+      - main  # Trigger the workflow on pushes to the main branch
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
   build_latex:
     runs-on: ubuntu-latest
-    environment: main  
+
     steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      # Step 2: Set up LaTeX environment
+      - name: Set up LaTeX environment
+        run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
 
-      - name: Build PDF
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: Arash-Sarshar-CV.tex
+      # Step 3: Compile LaTeX to PDF
+      - name: Compile LaTeX document
+        run: latexmk -pdf -interaction=nonstopmode -output-directory=output Arash-Sarshar-CV.tex
 
-      - name: Publish PDF
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
-          source: "Arash-Sarshar-CV.pdf"
-          target: "~/public_html/share"
-          use_insecure_cipher: true
+      # Step 4: Commit the PDF to the repository
+      - name: Commit and Push PDF
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Actions"
+          cp output/Arash-Sarshar-CV.pdf .
+          git add Arash-Sarshar-CV.pdf
+          git commit -m "Automated PDF update"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the built-in GitHub token
