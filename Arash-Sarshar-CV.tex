@@ -1,0 +1,615 @@
+%!TeX program = pdflatex
+% Arash Sarshar's Curriculum Vitae
+% Email: sarshar@vt.edu
+% Web: https://sarshar.dev/
+% Repo: https://github.com/elswit/cv
+
+\documentclass[11pt,letterpaper]{report}
+
+\usepackage[T1]{fontenc} % output T1 font encoding (8-bit) for accented characters as single glyph
+\usepackage[strict,autostyle]{csquotes} % smart and nestable quote marks
+\usepackage[USenglish]{babel} % regionalize hyphens, quote marks, etc automatically
+\usepackage{microtype}% improve text appearance with kerning, etc
+\usepackage{datetime} % enable formatting of date output
+\usepackage{tabto}    % make nice tabbing
+\usepackage{hyperref} % enable hyperlinks and pdf metadata
+\usepackage{geometry} % manually set page margins
+\usepackage{enumitem} % enumerate with [resume] option
+\usepackage{titlesec} % allow custom section fonts
+\usepackage{setspace} % custom line spacing
+\usepackage{xspace}   % for custom spacing
+
+% what is your name?
+\newcommand{\myname}{Arash Sarshar}
+
+% paper information command
+\newcommand{\paperinfo}[5]{
+    \tab{}
+    #1, % List of authors
+    \enquote{#2,} % Title of the paper (italicized)
+    \textit{#3}, % Publication name (italicized)
+    #4. % Publication information
+    \href{#5}{#5} % Link using \href
+}
+
+
+% select default typefaces
+\usepackage{ebgaramond} % document's serif typeface
+\usepackage{tgheros}    % document's sans serif typeface
+
+% how far to tab for list items with left-aligned date: different fonts need different widths
+\newcommand{\listtabwidth}{1.7cm}
+
+% define font to use as document's title
+\newcommand{\namefont}[1]{{\normalfont\bfseries\Huge{#1}}}
+
+% set section heading fonts and before/after spacing
+\SetTracking{encoding=*, family=\sfdefault}{30} % increase sans serif headings tracking
+\titleformat{\section}{\lsstyle\sffamily\small\bfseries\uppercase}{}{}{}{}
+\titlespacing{\section}{0pt}{30pt plus 4pt minus 4pt}{8pt plus 2pt minus 2pt}
+
+% set subsection heading fonts and before/after spacing
+\titleformat{\subsection}{\lsstyle\sffamily\footnotesize\bfseries}{}{}{}{}
+\titlespacing{\subsection}{0pt}{16pt plus 4pt minus 4pt}{4pt plus 2pt minus 2pt}
+
+% set page margins (assumes letter paper)
+\geometry{body={6.5in, 9.0in},
+    left=1.0in,
+    top=1.0in}
+
+% prevent paragraph indentation
+\setlength\parindent{0em}
+
+% set line spacing
+\setstretch{0.9}
+
+% define space between list items
+\newcommand{\listitemspace}{0.25em}
+
+% make unordered lists without bullets and use compact spacing
+\renewenvironment{itemize}
+{\begin{list}{}{\setlength{\leftmargin}{0em}
+                \setlength{\parskip}{0em}
+                \setlength{\itemsep}{\listitemspace}
+                \setlength{\parsep}{\listitemspace}}}
+{\end{list}}
+
+% make tabbed lists so content is left-aligned next to years
+\TabPositions{\listtabwidth}
+\newlist{tablist}{description}{3}
+\setlist[tablist]{leftmargin=\listtabwidth,
+    labelindent=0em,
+    topsep=0em,
+    partopsep=0em,
+    itemsep=\listitemspace,
+    parsep=\listitemspace,
+    font=\normalfont}
+
+% print only the month and year when using \today
+\newdateformat{monthyeardate}{\monthname[\THEMONTH] \THEYEAR}
+
+% define hyperlink appearance and metadata for pdf properties
+\hypersetup{
+    colorlinks  = true,
+    urlcolor    = black,
+    citecolor   = black,
+    linkcolor   = black,
+    pdfauthor   = {\myname},
+    pdfkeywords = {Machine Learning, Data Science, Scientific Computing, Computational Science, AI, Applied Mathematics},
+    pdftitle    = {\myname: Curriculum Vitae},
+    pdfsubject  = {Curriculum Vitae},
+    pdfpagemode = UseNone
+}
+
+\begin{document}
+    \raggedright{}
+
+    % display your name as the document title
+    \namefont{\myname}
+
+    % affiliation and contact info blocks
+    \vspace{1em}
+    \begin{minipage}[t]{0.700\textwidth}
+        % current primary affiliation, left-aligned
+        Department of Computer Engineering and Computer Science \\
+        College of Engineering \\
+        California State University, Long Beach
+    \end{minipage}
+    \begin{minipage}[t]{0.295\textwidth}
+        % contact info details, right-aligned
+        \flushright{}
+        \href{mailto:arash.sarshar@csulb.edu}{arash.sarshar@csulb.edu} \\
+        +1 (562) 985 4671 \\
+        \href{https://sarshar.dev}{sarshar.dev}
+    \end{minipage}
+
+
+    \section*{Education}
+
+    \begin{tablist}
+
+        \item[Ph.D.] \tab{}Computer Science, Virginia Tech, 2020
+        \item[M.S.]  \tab{}Electrical Engineering, Ferdowsi University, 2012
+        \item[B.S.]  \tab{}Electrical Engineering, Shahid Beheshti University, 2008
+
+    \end{tablist}
+
+
+
+    \section*{Appointments}
+
+    \begin{tablist}
+
+    \item[2023--\xspace{2030}]       \tab{}California State University, Long Beach \\
+                              Assistant Professor, Department of Computer Engineering and Computer Science \\
+
+    \item[2020--2022]                \tab{} Virginia Tech\\
+                              Postdoctoral Associate, Department of Computer Science
+
+    \end{tablist}
+
+
+
+    \section*{Research Areas}
+
+    \begin{itemize}
+
+        \item Scientific Machine Learning: Data-Driven and Equations-Based Modeling, Simulation, and Optimization
+
+        \item Computational Science: Numerical Methods for Forward and Inverse Problems, High-Performance Computing
+    \end{itemize}
+
+
+
+    \section*{Publications}
+
+    \subsection*{Journal Articles}
+
+    \begin{tablist}
+    
+    %%%%
+    \item[2024] \paperinfo{A. Bhattacharjee, A. Popov, A. Sarshar, A. Sandu}
+    {Improving the Adaptive Moment Estimation (ADAM) stochastic optimizer through an Implicit-Explicit (IMEX) time-stepping approach}
+    {Journal of Machine Learning for Modeling and Computing}
+    {2024}
+    {https://doi.org/10.1615/JMachLearnModelComput.2024053508}
+
+    %%%%
+    \item[2022] \paperinfo{S. Roberts, A. Popov, A. Sarshar, A. Sandu}
+        {A fast time-stepping strategy for ODE systems equipped with a surrogate model}
+        {SIAM Journal on Scientific Computing}{44 (3), A1405-A1427}
+        {https://epubs.siam.org/doi/abs/10.1137/20M1386281}
+
+    %%%%
+    \item[2022] \paperinfo{S. González--Pinto, D. Hernández--Abreu, M. S. Pérez--Rodríguez, A. Sarshar, S. Roberts, A. Sandu}
+        {A unified formulation of splitting-based implicit time integration schemes}
+        {Journal of Computational Physics}{Volume 448, 2022}
+        {https://doi.org/10.1016/j.jcp.2021.110766}
+
+    %%%%
+    \item[2021] \paperinfo{S. Roberts, J. Loeffeld, A. Sarshar, C. S. Woodward, A. Sandu}
+        {Implicit multirate GARK methods}
+        {Journal of Scientific Computing}{Volume 87, Issue 1, 2021}
+        {https://doi.org/10.1007/s10915-020-01400-z}
+
+    %%%%
+    \item[2021] \paperinfo{A. Sarshar, S. Roberts, A. Sandu}
+        {Alternating Directions Implicit Integration in a General Linear Method Framework}
+        {Journal of Computational and Applied Mathematics}{Volume 389, 15 January 2021}
+        {https://doi.org/10.1016/j.cam.2019.112619}
+
+    %%%%
+    \item[2020] \paperinfo{S. Roberts, A. Sarshar, A. Sandu}
+        {Coupled Multirate Infinitesimal GARK Schemes for Stiff Systems with Multiple Time Scales}
+        {SIAM Journal on Scientific Computing}{Vol. 42, No. 3, PP A1609–A1638}
+        {https://epubs.siam.org/doi/abs/10.1137/19M1266952}
+
+    %%%%
+    \item[2020] \paperinfo{S. Roberts, A. Sarshar, A. Sandu}
+        {Parallel Implicit-Explicit General Linear Methods}
+        {Communications in Applied Mathematics and Computational Science}{Volume 6, Issue 2, 2021}
+        {https://doi.org/10.1007/s42967-020-00083-5}
+
+    %%%%
+    \item[2019] \paperinfo{A. Sarshar, S. Roberts, A. Sandu}
+        {Design of high-order decoupled multirate GARK schemes}
+        {SIAM Journal on Scientific Computing}{Vol. 41, No. 2, PP A816-A847}
+        {https://epubs.siam.org/doi/abs/10.1137/18M1182875}
+
+    %%%%
+    \item[2017] \paperinfo{A. Sarshar, P. Tranquilli, B. Pickering, A. McCall, A. Sandu, C. J. Roy}
+        {A Numerical Investigation of Matrix-Free Implicit Time-Stepping Methods for Large CFD Simulations}
+        {Computers \& Fluids}{Volume 159, 15 December 2017, Pages 53--63}
+        {https://doi.org/10.1016/j.compfluid.2017.09.014}
+
+    %%%%
+    \item[2017] \paperinfo{P. Tranquilli, S. R. Glandon, A. Sarshar, A. Sandu}
+        {Analytical Jacobian-vector products for the matrix-free time integration of partial differential equations}
+        {Journal of Computational and Applied Mathematics}{Volume 310, 15 January 2017, Pages 213--223}
+        {http://www.sciencedirect.com/science/article/pii/S0377042716302199}
+
+    \end{tablist}
+
+
+
+    % \subsection*{Book Chapters}
+
+    % \begin{tablist}
+
+    %     \item[2022] \tab{}G. Boeing, M. Batty, S. Jiang, and L. Schweitzer. \enquote{Urban Analytics: History, Trajectory, and Critique.} In: \textit{Handbook of Spatial Analysis in the Social Sciences} (pp. 503--516), edited by S. Rey and R. Franklin. Cheltenham, England:\ Edward Elgar. \href{https://doi.org/10.4337/9781789903942.00039}{doi:10.4337/9781789903942.00039}
+    % \end{tablist}
+
+
+    \subsection*{Conference Proceedings}
+
+    \begin{tablist}
+    
+    %%%%
+    \item[2016] \paperinfo{A. Sarshar, A. E. Tabari}
+    {Design of a Stacked Stub-Loaded Patch Element for X-band Reflectarray Antenna with True Time Delay}
+    {7th European Conference on Antennas and Propagation}
+    {Gothenberg, Sweden}
+    {http://ieeexplore.ieee.org/xpl/abstractAuthors.jsp?reload=true\&tp=\&arnumber=6546931}
+    %%%%
+
+    \end{tablist}
+
+
+
+    % \subsection*{Edited Articles and Reviews}
+
+    % \begin{tablist}
+
+    %     \item[2024] \tab{} D. Adlakha, E. Resendiz, A.~V. Moudon, J. Sallis, C. Higgs, B. Giles-Corti, D. Salvo, E. Cerin, G. Boeing, S. Liu, and M. Lowe. \enquote{El Observatorio Global de Ciudades Saludables y Sostenibles.} \textit{Notas CPAU} 55, 2738. \href{https://bit.ly/3Xv8JOW}{https://bit.ly/3Xv8JOW}
+    % \end{tablist}
+
+
+
+    \subsection*{Technical Reports}
+
+    \begin{tablist}
+
+        
+        \item[2022] \paperinfo{A. A. Popov, A. Sarshar, A. Chenault, A. Sandu}
+                                {A Meta-learning Formulation of the Autoencoder Problem for Non-linear Dimensionality Reduction}
+                                {Technical Report}
+                                {arXiv}
+                                {https://arxiv.org/pdf/2207.06676}
+        %%%%
+        \item[2022] \paperinfo{J Barry-Straume, A Sarshar, AA Popov, A Sandu}
+                                {Physics-informed neural networks for PDE-constrained optimization and control}
+                                {Technical Report}
+                                {arXiv}
+                                {arXiv preprint arXiv:2205.03377}
+        %%%%
+        \item[2019] \paperinfo{A. Sarshar, S. Roberts, A. Sandu}
+                                {Linearly-Implicit General Linear Methods}
+                                {Technical Report}
+                                {Virginia Tech}
+                                {https://vtechworks.lib.vt.edu/bitstream/handle/10919/109996/Technical-Report-Linearly-Implicit-GLM.pdf?sequence=1}
+        %%%%
+    \end{tablist}
+
+
+
+    % \subsection*{Patents}
+
+    % \begin{tablist}
+
+    %     \item[2014] \tab{}A.~E. Beck, G. Boeing, and D. Shannon. \textit{Systems and Methods for Analyzing Requirements}. United States patent US8650186B2, European patent EP2413256, Australian patent AU2011204935, Canadian patent CA2747481, Chinese patent CN102346763.
+
+    % \end{tablist}
+
+
+
+    \section*{Invited Talks}
+
+    \begin{tablist}
+
+        \item[2024] \tab{}\enquote{Uncertainty Quantification for Scientific Machine Learning Using Deep Operator Networks.}
+        Siam Annual Meeting 2024, Spokane, Washington.
+        \href{https://youtu.be/1iTHm9u9lr0?feature=shared}{https://youtu.be/1iTHm9u9lr0}
+
+        \item[2023] \tab{}\enquote{Science-guided Machine Learning for Forward, Inverse, and Control Problems.}
+        Grand Valley State University, Michigan.
+        \href{https://people.cs.vt.edu/sarshar/talks/gvsu/}{https://people.cs.vt.edu/sarshar/talks/gvsu/}
+   
+        \item[2022] \tab{}\enquote{On Time-stepping Methods for Gradient-flow Optimization.} 
+        Canadian Applied and Industrial Mathematics Society, SCMAI 2022, Ontario, Canada.
+        \href{https://sarshar.dev/files/adam-gark-slides.pdf}{https://sarshar.dev/files/adam-gark-slides.pdf}
+
+        \item[2020] \tab{}\enquote{Linearly Implicit Genral Linear methods.} SIAM Conference on Computational Science and Engineering 2021, Atlanta, Georgia. 
+
+        \item[2019] \tab{}\enquote{Discrete Multirate GARK schems.}
+        SIAM Conference on Computational Science and Engineering 2019, Spokane, Washington.
+        \href{https://www.pathlms.com/siam/courses/10878/sections/14361/video\_presentations/127463}{https://www.pathlms.com/siam/courses/10878/sections/14361/video\_presentations/127463}
+
+    \end{tablist}
+
+    % \subsection*{Invited Symposium Talks}
+
+    % \begin{tablist}
+
+    % \item[2023] \tab{}\enquote{Spatial Analytics to Benchmark and Monitor Healthy and Sustainable Cities.} Exploring the Research Opportunities from the Intersection of Advancing Planetary Health and Cardiovascular Disease: Improving Human Health. Hosted by the U.S. National Institutes of Health. Dec 14--15.
+
+    % \end{tablist}
+
+    % \subsection*{Campus Talks}
+
+    % \begin{tablist}
+
+    %     %\item[2023] \tab{}\enquote{Generalizability in Urban Science.} USC Price School Faculty Seminar Series. Los Angeles, California. Nov 14.
+
+    %     \item[2023] \tab{}\enquote{Resilient by Design: Simulating Street Network Disruptions across Every Urban Area in the World.} METRANS University Transportation Center Speaker Series. Los Angeles, California. Nov 2.
+
+    % \end{tablist}
+
+    \section*{Conference Activity}
+
+    % \subsection*{Keynote and Plenary Addresses}
+
+    % \begin{tablist}
+
+    %     \item[2024] \tab{}\enquote{The Design of American Streets.} Keynote address. Induction ceremony of the Nu Theta chapter of Gamma Theta Upsilon, the international geographical honor society. Los Angeles, California. Apr 23.
+
+    %     \item[2021] \tab{}\enquote{Urban Mobility and Street Network Science.} Annual Regional Studies/Regional Science keynote lecture. Regional Studies Association Winter Conference. Nov 8.
+
+    %     \item[2019] \tab{}\enquote{Geographic Information, Spatial Networks, and the New Urban Science.} 8\textsuperscript{th} annual \textit{Transactions in GIS} plenary address. American Association of Geographers Annual Meeting. Washington, DC.\@ Apr 3--7.
+
+    %     \item[2018] \tab{}\enquote{The Legible and the Illegible: Urban Science, City Design, and Human Circulation.} Plenary address. The Architect of the Future Conference. Moscow, Russia. Sep 10--11.
+
+    % \end{tablist}
+
+    \subsection*{Sessions Organized}
+
+    \begin{tablist}
+
+        \item[2024] \tab{}\enquote{New Methods in Probabilistic and Science-Guided Machine Learning.}
+        Siam Annual Meeting 2024, Spokane, Washington.
+        % \href{https://meetings.siam.org/sess/dsp\_programsess.cfm?SESSIONCODE=79952}{https://meetings.siam.org/sess/dsp\_programsess.cfm?SESSIONCODE=79952}
+
+        \item[2021] \tab{}\enquote{Advances in Time-Stepping Methods for Multiphysics and Multiscale Problems - Parts I \& II.}
+        SIAM Conference on Computational Science and Engineering, Atlanta, Georgia.
+
+    \end{tablist}
+
+    % \subsection*{Sessions Chaired/Moderated}
+
+    % \begin{tablist}
+
+    %     \item[2021] \tab{}\enquote{Big Data and Machine Learning for Urban Mobility.} Association of Collegiate Schools of Planning Annual Conference. Miami, Florida. Oct 21--23.
+
+    % \end{tablist}
+
+    % \subsection*{Conference Papers Presented\footnote{Presenting author \textit{italicized} if other than first author.}}
+
+    % \begin{tablist}
+
+    %     \item[2024] \tab{}G. Boeing and J. Ha. \enquote{Vulnerability of Commutes: A Nationwide Simulation of Street Network Disruptions.} Association of Collegiate Schools of Planning Annual Conference. Seattle, Washington. Nov 7--9.
+
+    %     \item[2024] \tab{}G. Boeing and Y. Zhou. \enquote{Uncongested Travel Time Prediction from Sparse Open Data.} Association of Collegiate Schools of Planning Annual Conference. Seattle, Washington. Nov 7--9.
+
+    % \end{tablist}
+
+
+    \section*{Grants and Awards}
+
+    \begin{tablist}
+
+    \item[2024] CSULB ORED Multidisciplinary Research Grant (joint).
+    %     \item[2024] \tab{}USC Price High Impact Research Award
+    %     \item[2023] \tab{}National Planning Institute of Australia Award for Planning Research Excellence (joint)
+    %     \item[2022] \tab{}Planning Institute of Australia (Victoria) Award for Planning Excellence---Planning Research (joint)
+
+    \end{tablist}
+
+    % \subsection*{Awards and Honors}
+
+    % \begin{tablist}
+
+    %     \item[2024] \tab{}USC Price High Impact Research Award
+    %     \item[2023] \tab{}National Planning Institute of Australia Award for Planning Research Excellence (joint)
+    %     \item[2022] \tab{}Planning Institute of Australia (Victoria) Award for Planning Excellence---Planning Research (joint)
+
+    % \end{tablist}
+
+    % \subsection*{Competitive Grants and Fellowships}
+
+    % \begin{tablist}
+
+    %     %\item[2024--26] \tab{}Mobility Equity Research Initiative: Reducing Accessibility Gaps for the Most Disadvantaged (\$2,970,000). U.S. Department of Transportation research grant. Co-I.\@
+
+    %     %\item[2024--25] \tab{}Alleviating Health Inequities from Air Pollution in the Gateway Cities Region: An Evidence-Based, Community-Engaged, and Interdisciplinary Approach (\$249,992). USC President's Sustainability Initiative Award. Co-I.\@
+
+    % \end{tablist}
+
+
+
+    \section*{Courses Taught}
+
+    \subsection*{California State University, Long Beach}
+
+    \begin{itemize}
+
+        \item Artificial Intelligence
+        \item Pattern Recognition
+        \item Applied Machine Learning
+        \item Advanced Artificial Intelligence
+    \end{itemize}
+
+    \subsection*{Virginia Tech}
+    \begin{itemize}
+        \item Numerical Methods
+    \end{itemize}
+
+    \subsection*{Bahar Institute of Higher Education}
+    \begin{itemize}
+        \item Antennas and Wave Propagation
+    \end{itemize}
+
+    \section*{Service}
+
+    % \subsection*{Board of Directors}
+
+    % \begin{tablist}
+
+    %     \item[2024--]    \tab{}The Public Good Projects, New York, New York
+
+    % \end{tablist}
+
+    % \subsection*{Academic Journal Editorship}
+
+    % \begin{tablist}
+
+    %     \item[2020--]   \tab{}\textit{Urban Findings}, editorial board
+    %     \item[2021--24] \tab{}\textit{Urban Studies}, editorial board
+
+    % \end{tablist}
+
+    % \subsection*{Service to the Field}
+
+    % \begin{tablist}
+
+    %     \item[2024--]   \tab{}U.S. NIST Artificial Intelligence Safety Institute Consortium
+    %     \item[2024--]   \tab{}Western Wildfire Resilience Index, advisory committee
+    %     \item[2022--]   \tab{}Global Observatory of Healthy and Sustainable Cities, executive committee
+    %     \item[2021--22] \tab{}Association of Collegiate Schools of Planning, review and appraisal committee
+    %     \item[2021--22] \tab{}Spatial Data Science Symposium, program committee
+    %     \item[2021]     \tab{}World Society for Transport and Land Use Research, emerging data and technologies track co-lead
+    %     \item[2019--21] \tab{}Association of Collegiate Schools of Planning, outreach and engagement task force
+    %     \item[2019--20] \tab{}Future Cities Challenge, program committee
+    %     \item[2018--20] \tab{}Association of Collegiate Schools of Planning, review and appraisal committee
+    %     \item[2018--20] \tab{}Symposium on Simulation for Architecture and Urban Design, scientific committee
+
+    % \end{tablist}
+
+    \subsection*{Service to the University}
+
+    \begin{tablist}
+        \item[2024--2025] \tab{}CSULB CECS/STATS Data Science Degree Committee
+        \item[2024--2025] \tab{}CSULB COE  Awards Committee
+        \item[2024--2025] \tab{}CSULB CECS Graduate Curriculum Committee
+        \item[2023--2024] \tab{}CSULB CECS Undergraduate Curriculum Committee
+
+    \end{tablist}
+
+    \subsection*{Thesis Advising}
+
+    \begin{itemize}
+
+        \item Carol Gudumotu, Msc. in Computer Science, Fall 2023
+
+    \end{itemize}
+
+    % \subsection*{Studio Review Jury}
+
+    % \begin{itemize}
+
+    % \item MIT, Workshop on Geographic Information Systems (Prof.\ Sarah Williams), Fall 2018
+
+    % \end{itemize}
+
+
+
+    \section*{Peer Review}
+
+    \subsection*{Academic Journal Peer Review}
+
+
+    \begin{itemize}
+        \item \textit{SIAM Journal on Scientific Computing  }
+        \item \textit{International Journal of Computer Mathematics }
+        \item \textit{Computing and Visualization in Science}
+        \item \textit{Geo-scientific Model Development }
+        \item \textit{International Journal for Numerical Methods in Engineering }
+        \item \textit{Journal of Applied Numerical Mathematics }
+        \item \textit{Journal of Computational and Applied Mathematics }
+        \item \textit{International Journal of Applied Mechanics }
+        \item \textit{ICML Workshop on the Synergy of Scientific and Machine Learning Modeling }
+    \end{itemize}
+        
+
+
+    % \subsection*{Academic Press Peer Review}
+
+    % \begin{itemize}
+
+    %     \item Cambridge University Press
+    %     \item Routledge
+    %     \item Springer Nature
+    %     \item Taylor \& Francis
+
+    % \end{itemize}
+
+    % \subsection*{Funding Agency Peer Review}
+
+    % \begin{itemize}
+
+    %     \item European Science Foundation
+    %     \item Israel Science Foundation
+    %     \item U.S. National Science Foundation
+    %     \item Research Grants Council of Hong Kong
+    %     \item Social Sciences and Humanities Research Council of Canada
+    %     \item United Arab Emirates University, Office of Associate Provost for Research
+
+    % \end{itemize}
+
+
+
+    \section*{Memberships}
+
+    \begin{itemize}
+        \item Society for Industrial and Applied Mathematics 
+        \item Institute of Electrical and Electronics Engineers 
+        \item Association for Computing Machinery
+
+    \end{itemize}
+
+
+
+    % \section*{Credentials}
+
+    % \begin{itemize}
+
+    %     \item U.S. Department of Defense secret clearance
+    %     \item U.S. Department of Homeland Security public trust
+    %     \item Project Management Professional (PMP)
+
+    % \end{itemize}
+
+
+
+    % \section*{Consulting}
+
+    % \begin{tablist}
+
+    %     \item[2017--19] \tab{}The Public Good Projects, New York, New York
+    %     \item[2017--18] \tab{}Calthorpe Analytics, Berkeley, California
+    %     \item[2016--18] \tab{}UrbanSim Inc., Berkeley, California
+    %     \item[2013--15] \tab{}Avalon Health Economics, Morristown, New Jersey
+    %     \item[2013]     \tab{}Raimi \& Associates, Berkeley, California
+    %     \item[2010--11] \tab{}Voluntary Service Overseas, London, England
+
+    % \end{tablist}
+
+
+
+    % \section*{Professional Employment}
+
+    % \begin{tablist}
+
+    %     \item[2009--13] \tab{}Accenture, New York, New York; London, England; San Diego, California
+    %     \item[2007--09] \tab{}Permission Data, New York, New York
+    %     \item[2004--07] \tab{}Acumen Inc., Mesa, Arizona
+
+    % \end{tablist}
+
+
+
+    % display today's date as Month Year after a vertical space below the end of the text
+    \begin{center}
+        \vfill
+        Updated \monthyeardate\today
+    \end{center}
+
+\end{document}

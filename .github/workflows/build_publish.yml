@@ -16,7 +16,7 @@ jobs:
       - name: Build PDF
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: cv-gboeing.tex
+          root_file: Arash-Sarshar-CV.tex
 
       - name: Publish PDF
         uses: appleboy/scp-action@v0.1.7
@@ -25,6 +25,6 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
-          source: "cv-gboeing.pdf"
+          source: "Arash-Sarshar-CV.pdf"
           target: "~/public_html/share"
           use_insecure_cipher: true
