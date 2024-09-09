@@ -8,6 +8,7 @@ on:
 jobs:
   build_latex:
     runs-on: ubuntu-latest
+    environment: main  
     steps:
 
       - name: Checkout repo
