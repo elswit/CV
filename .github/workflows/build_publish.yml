@@ -3,34 +3,61 @@ name: Build and Commit PDF
 on:
   push:
     branches:
-      - main  # Trigger the workflow on pushes to the main branch
-  workflow_dispatch:  # Allows manual triggering of the workflow
+      - main
+    paths:
+      - '**/*.tex'
+      - '**/*.bib'
+      - '**/*.sty'
+      - '**/*.cls'
+      - '.latexmkrc'
+      - 'latexmkrc'
+      - '.github/workflows/build_publish.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cv-pdf-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build_latex:
-    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
 
     steps:
-      # Step 1: Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
-      # Step 2: Set up LaTeX environment
-      - name: Set up LaTeX environment
-        run: sudo apt-get update && sudo apt-get install -y texlive-full latexmk
+      - name: Set reproducible PDF timestamp
+        run: git show -s --format=%ct HEAD > .cv-build-epoch
 
-      # Step 3: Compile LaTeX to PDF
       - name: Compile LaTeX document
-        run: latexmk -pdf -interaction=nonstopmode -output-directory=output Arash-Sarshar-CV.tex
+        uses: xu-cheng/latex-action@6549dc21effb2730855a1281407ecfcececc6c1b # v4
+        with:
+          root_file: Arash-Sarshar-CV.tex
+          texlive_version: '2025'
+          pre_compile: export SOURCE_DATE_EPOCH="$(cat .cv-build-epoch)"
+          args: -pdf -g -file-line-error -halt-on-error -interaction=nonstopmode
 
-      # Step 4: Commit the PDF to the repository
       - name: Commit and Push PDF
         run: |
+          # Never publish an older build over a newer source commit.
+          git fetch origin main
+          if [ "$(git rev-parse origin/main)" != "$GITHUB_SHA" ]; then
+            echo "Main has advanced; skipping this outdated build."
+            exit 0
+          fi
+
+          git add -- Arash-Sarshar-CV.pdf
+          if git diff --cached --quiet; then
+            echo "PDF is unchanged; nothing to commit."
+            exit 0
+          fi
+
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "GitHub Actions"
-          cp output/Arash-Sarshar-CV.pdf .
-          git add -f Arash-Sarshar-CV.pdf
           git commit -m "Automated PDF update"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use the built-in GitHub token
+          git push origin HEAD:main
